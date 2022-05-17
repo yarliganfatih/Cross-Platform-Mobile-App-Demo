@@ -1,6 +1,16 @@
 import * as React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 
+const callAPI = async (url) => {
+    return fetch(url)
+    .then((response) => response.json())
+    .then((responseJson) => {
+    return responseJson;
+    })
+    .catch((error) => {
+    console.error(error);
+    });
+}
 
 var DATA = [
     {
@@ -17,46 +27,9 @@ var DATA = [
     },
   ];
 
-// Calling API is successful but TODO set result to DATA variable
-/*
-function getFromAPI(url){
-  var obj;
-  fetch(url)
-    .then(res => res.json())
-    .then(data => obj = data)
-  return obj;
- }
-
-DATA = getFromAPI('https://jsonplaceholder.typicode.com/users');
-*/
-
-/*
-async function getUserAsync() 
-{
-  let response = await fetch("https://jsonplaceholder.typicode.com/users");
-  let data = await response.json()
-  return data;
-}
-
-DATA = getUserAsync().then(data => console.log(data));
-
-*/
-/*
-var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
-
-DATA = fetch("https://jsonplaceholder.typicode.com/users", requestOptions)
-  .then(response => response.text())
-  .then((result) => {
-    //console.log(result)
-    return result;
-  })
-  .catch(error => console.log('error', error));
-*/
-
-//var timeout = setTimeout(function(){console.log(DATA)},5000);
+(async () => {
+    DATA = await callAPI("https://jsonplaceholder.typicode.com/users").then();
+})();
   
   const Item = ({ title }) => (
     <View style={styles.item}>
