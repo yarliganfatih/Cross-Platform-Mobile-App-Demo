@@ -1,70 +1,76 @@
-import * as React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import React, { Component } from 'react';
+import UserListView from '../views/UserListView';
+import {
+    StyleSheet,
+    View,
+    ActivityIndicator,
+    FlatList,
+    Text,
+    TouchableOpacity
+} from "react-native";
 
-const callAPI = async (url) => {
-    return fetch(url)
-    .then((response) => response.json())
-    .then((responseJson) => {
-    return responseJson;
-    })
-    .catch((error) => {
-    console.error(error);
-    });
+class UserList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            fromFetch: false,
+            dataSource: [],
+        };
+    }
+    goForFetch = () => {
+        this.setState({
+            fromFetch: true,
+            loading: true,
+
+        })
+        fetch("https://jsonplaceholder.typicode.com/users")
+            .then(response => response.json())
+            .then((responseJson) => {
+                console.log('getting data from api', responseJson)
+                this.setState({
+                    loading: false,
+                    dataSource: responseJson
+                })
+            })
+            .catch(error => console.log(error))
+    }
+    FlatListSeparator = () => {
+        return (
+            <View style={{
+                height: .5,
+                width: "100%",
+                backgroundColor: "rgba(0,0,0,0.5)",
+            }}
+            />
+        );
+    }
+    renderItem = (data) => {
+        return (
+            <TouchableOpacity
+            onPress={() => {
+          console.log('pressed id :',data.item.id); //TODO Router UserDetail
+        }}
+            >
+                <Text>{data.item.name}</Text>
+            </TouchableOpacity>
+        )
+
+    }
+
+    render() {
+        const { dataSource, fromFetch, loading } = this.state
+        return ( 
+            <UserListView
+                goForFetch={this.goForFetch}
+                dataSource={dataSource}
+                loading={loading}
+                fromFetch={fromFetch}
+                FlatListSeparator={this.FlatListSeparator}
+                renderItem={this.renderItem}
+            />
+        );
+    }
 }
 
-var DATA = [
-    {
-      id: '1',
-      name: 'First Item',
-    },
-    {
-      id: '2',
-      name: 'Second Item',
-    },
-    {
-      id: '3',
-      name: 'Third Item',
-    },
-  ];
-
-(async () => {
-    DATA = await callAPI("https://jsonplaceholder.typicode.com/users").then();
-})();
-  
-  const Item = ({ title }) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  );
-export default function UserList() {
-  const renderItem = ({ item }) => (
-    <Item title={item.name} />
-  );
-  return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-    },
-    item: {
-      backgroundColor: '#bbbbbb',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    title: {
-      fontSize: 32,
-    },
-  });
+export default UserList;
