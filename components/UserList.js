@@ -18,11 +18,13 @@ class UserList extends Component {
             dataSource: [],
         };
     }
+  componentDidMount() {
+      this.goForFetch()
+   }
     goForFetch = () => {
         this.setState({
             fromFetch: true,
             loading: true,
-
         })
         fetch("https://jsonplaceholder.typicode.com/users")
             .then(response => response.json())
@@ -44,12 +46,16 @@ class UserList extends Component {
             }}
             />
         );
-    }
+    } 
     renderItem = (data) => {
         return (
             <TouchableOpacity
             onPress={() => {
+              
           console.log('pressed id :',data.item.id); //TODO Router UserDetail
+          this.props.navigation.navigate('User Detail', {
+                userid: data.item.id,
+              });
         }}
             >
                 <Text>{data.item.name}</Text>
@@ -57,7 +63,6 @@ class UserList extends Component {
         )
 
     }
-
     render() {
         const { dataSource, fromFetch, loading } = this.state
         return ( 
