@@ -5,13 +5,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import UserList from './components/UserList';
 import UserDetail from './components/UserDetail';
+import PostList from './components/PostList';
+import PostDetail from './components/PostDetail';
 
 function GoToButton({ screenName }) {
   const navigation = useNavigation();
 
   return (
     <Button
-      title={`Go to ${screenName}`}
+      style={{ width: "50%" }}
+      title={`           ${screenName}           `}
       onPress={() => navigation.navigate(screenName)}
     />
   );
@@ -25,9 +28,13 @@ function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="User List" component={UserList} />
         <Stack.Screen name="User Detail" component={UserDetail} />
+        <Stack.Screen name="Post List" component={PostList} />
+        <Stack.Screen name="Post Detail" component={PostDetail} />
       </Stack.Navigator>
-    <GoToButton screenName="User List" />
-    <GoToButton screenName="User Detail" />
+      <View style={{ flexDirection: "row", width: "100%" }}>
+        <GoToButton screenName="User List" />
+        <GoToButton screenName="Post List" />
+      </View>
     </NavigationContainer>
   );
 }
