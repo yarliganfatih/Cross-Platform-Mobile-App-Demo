@@ -18,21 +18,46 @@ class PostList extends Component {
             dataSource: [],
         };
     }
-    componentDidMount() {
-        this.goForFetch()
+    static getDerivedStateFromProps(props, state) {
+        let _userid = state.userid;
+        if (typeof props.userid !== 'undefined') {
+            _userid = props.userid
+        }
+        if (_userid != state.userid) {
+            console.log('changed userid in PostList : ', _userid);
+            //this.goForFetch() // Error, so =>componentDidUpdate(prevProps)
+        }
+        return { userid: _userid };
     }
-    goForFetch = () => {
+    componentDidUpdate(prevProps, prevState) { // does not detecting
+        if (prevState.userid !== this.state.userid) {
+            console.log('change detected userid in PostList : ', this.state.userid);
+            let fetchUrl = "https://jsonplaceholder.typicode.com/posts?userId=" + this.state.userid;
+            console.log(fetchUrl);
+            this.goForFetch(fetchUrl);
+        }
+    }
+    componentDidMount() {
+        this.goForFetch();
+    }
+    goForFetch = (fetchUrl = "https://jsonplaceholder.typicode.com/posts") => {
         this.setState({
             fromFetch: true,
             loading: true,
         })
-        fetch("https://jsonplaceholder.typicode.com/posts")
+        console.log(fetchUrl);
+        if (typeof this.state.userid !== 'undefined') {
+            fetchUrl = fetchUrl + "?userId=" + this.state.userid;
+        }
+        console.log(fetchUrl);
+
+        fetch(fetchUrl)
             .then(response => response.json())
             .then((responseJson) => {
                 console.log('getting data from api', responseJson)
                 this.setState({
                     loading: false,
-                    dataSource: responseJson.slice(0, 20)
+                    dataSource: responseJson.slice(0, 20),
                 })
             })
             .catch(error => console.log(error))
@@ -50,6 +75,7 @@ class PostList extends Component {
     renderItem = (data) => {
         return (
             <TouchableOpacity
+                style={[{ padding: 5 }, data.item.id % 2 && { backgroundColor: '#ffffff' }]}
                 onPress={() => {
 
                     console.log('pressed id :', data.item.id); //TODO Router PostDetail
@@ -66,14 +92,19 @@ class PostList extends Component {
     render() {
         const { dataSource, fromFetch, loading } = this.state
         return (
-            <PostListView
-                goForFetch={this.goForFetch}
-                dataSource={dataSource}
-                loading={loading}
-                fromFetch={fromFetch}
-                FlatListSeparator={this.FlatListSeparator}
-                renderItem={this.renderItem}
-            />
+            <View>
+                <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                    {this.props.title}
+                </Text>
+                <PostListView
+                    goForFetch={this.goForFetch}
+                    dataSource={dataSource}
+                    loading={loading}
+                    fromFetch={fromFetch}
+                    FlatListSeparator={this.FlatListSeparator}
+                    renderItem={this.renderItem}
+                />
+            </View>
         );
     }
 }

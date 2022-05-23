@@ -12,6 +12,7 @@ class PostDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            displayExtra: (typeof this.props.displayExtra !== 'undefined') ? this.props.displayExtra : true,
             loading: false,
             fromFetch: false,
             dataSource: [],
@@ -58,16 +59,25 @@ class PostDetail extends Component {
     }
 
     render() {
-        const { dataSource, fromFetch, loading, creatorUserId } = this.state
+        const { dataSource, fromFetch, loading, creatorUserId, displayExtra } = this.state
         return (
             <View>
+
+                <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                    {this.props.title}
+                </Text>
                 <PostDetailView
                     goForFetch={this.goForFetch}
                     dataSource={dataSource}
                     loading={loading}
                     fromFetch={fromFetch}
                 />
-                <UserDetail userid={creatorUserId} />
+
+                {
+                    displayExtra ?
+                        <UserDetail userid={creatorUserId} title="Creator User Details" displayExtra={false} />
+                        : ""
+                }
             </View>
         );
     }

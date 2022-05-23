@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserDetailView from '../views/UserDetailView';
+import PostList from './PostList';
 
 import {
     StyleSheet,
@@ -11,6 +12,7 @@ class UserDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            displayExtra: (typeof this.props.displayExtra !== 'undefined') ? this.props.displayExtra : true,
             loading: false,
             fromFetch: false,
             dataSource: [],
@@ -59,14 +61,27 @@ class UserDetail extends Component {
     }
 
     render() {
-        const { dataSource, fromFetch, loading } = this.state
+        const { dataSource, fromFetch, loading, displayExtra } = this.state
         return (
-            <UserDetailView
-                goForFetch={this.goForFetch}
-                dataSource={dataSource}
-                loading={loading}
-                fromFetch={fromFetch}
-            />
+            <View>
+
+                <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                    {this.props.title}
+                </Text>
+                <UserDetailView
+                    goForFetch={this.goForFetch}
+                    dataSource={dataSource}
+                    loading={loading}
+                    fromFetch={fromFetch}
+                />
+
+                {
+                    displayExtra ?
+                        <PostList userid={this.state.userid} title="Created Posts" navigation={this.props.navigation} route={this.props.route} />
+                        :
+                        ""
+                }
+            </View>
         );
     }
 }
