@@ -18,9 +18,9 @@ class UserList extends Component {
             dataSource: [],
         };
     }
-  componentDidMount() {
-      this.goForFetch()
-   }
+    componentDidMount() {
+        this.goForFetch()
+    }
     goForFetch = () => {
         this.setState({
             fromFetch: true,
@@ -46,17 +46,18 @@ class UserList extends Component {
             }}
             />
         );
-    } 
+    }
     renderItem = (data) => {
         return (
             <TouchableOpacity
-            onPress={() => {
-              
-          console.log('pressed id :',data.item.id); //TODO Router UserDetail
-          this.props.navigation.navigate('User Detail', {
-                userid: data.item.id,
-              });
-        }}
+                style={[{ padding: 10 }, data.item.id % 2 && { backgroundColor: '#ffffff' }]}
+                onPress={() => {
+
+                    console.log('pressed id :', data.item.id);
+                    this.props.navigation.navigate('User Detail', {
+                        userid: data.item.id,
+                    });
+                }}
             >
                 <Text>{data.item.name}</Text>
             </TouchableOpacity>
@@ -65,15 +66,21 @@ class UserList extends Component {
     }
     render() {
         const { dataSource, fromFetch, loading } = this.state
-        return ( 
-            <UserListView
-                goForFetch={this.goForFetch}
-                dataSource={dataSource}
-                loading={loading}
-                fromFetch={fromFetch}
-                FlatListSeparator={this.FlatListSeparator}
-                renderItem={this.renderItem}
-            />
+        return (
+            <View>
+
+                <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                    {this.props.title}
+                </Text>
+                <UserListView
+                    goForFetch={this.goForFetch}
+                    dataSource={dataSource}
+                    loading={loading}
+                    fromFetch={fromFetch}
+                    FlatListSeparator={this.FlatListSeparator}
+                    renderItem={this.renderItem}
+                />
+            </View>
         );
     }
 }

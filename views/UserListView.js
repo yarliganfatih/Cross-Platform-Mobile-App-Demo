@@ -12,22 +12,22 @@ const UserListView = (props) => {
                 />
             </View>
 
-<View style={{ margin: 18, textAlign: 'center' }}>
-            {fromFetch ?
-                <FlatList 
-                    data={dataSource}
-                    ItemSeparatorComponent={FlatListItemSeparator}
-                    renderItem={item => renderItem(item)}
-                    keyExtractor={item => item.id}
-                /> : "no data yet"
-            }
-            {loading &&
-                <View>
-                    <ActivityIndicator size="large" color="#0c9" />
-                    <Text>Fetching Data</Text>
-                </View>
-            }
-        </View>
+            <View style={{ margin: 18, textAlign: 'center' }}>
+                {fromFetch ?
+                    <FlatList
+                        data={dataSource}
+                        ItemSeparatorComponent={FlatListItemSeparator}
+                        renderItem={item => renderItem(item)}
+                        keyExtractor={item => item.id}
+                    /> : "no data yet"
+                }
+                {loading &&
+                    <View>
+                        <ActivityIndicator size="large" color="#0c9" />
+                        <Text>Fetching Data</Text>
+                    </View>
+                }
+            </View>
         </View>
     )
 }
