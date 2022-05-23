@@ -16,28 +16,37 @@ class UserDetail extends Component {
             dataSource: [],
         };
     }
-  componentWillMount() {
-      let _userid = this.state.userid;
-      if(this.props.route.params.userid !== 'undefined'){
-        _userid = this.props.route.params.userid
-      }else if(this.props.userid !== 'undefined'){
-        _userid = this.props.userid
-      }else{
-        _userid = 1
-      }
-      this.setState({
-          userid: _userid,
-      })
-   }
-  componentDidMount() {
-      this.goForFetch()
-   }
+
+    static getDerivedStateFromProps(props, state) {
+        let _userid = state.userid;
+        if (typeof props.route !== 'undefined') {
+            _userid = props.route.params.userid
+        } else if (typeof props.userid !== 'undefined') {
+            _userid = props.userid
+        }
+        if (_userid != state.userid) {
+            console.log('changed userid in getDerivedStateFromProps : ', _userid);
+            //this.goForFetch() // Error, so =>componentDidUpdate(prevProps)
+        }
+        return { userid: _userid };
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.userid !== this.state.userid) {
+            console.log('change detected userid in componentDidUpdate : ', this.state.userid);
+            this.goForFetch(); //example calling redux action
+        }
+    }
+
+    //componentWillMount is unnecessary
+    componentDidMount() {
+        this.goForFetch()
+    }
     goForFetch = () => {
         this.setState({
             fromFetch: true,
             loading: true,
         })
-        fetch("https://jsonplaceholder.typicode.com/users/"+this.state.userid)
+        fetch("https://jsonplaceholder.typicode.com/users/" + this.state.userid)
             .then(response => response.json())
             .then((responseJson) => {
                 console.log('getting data from api', responseJson)
@@ -51,7 +60,7 @@ class UserDetail extends Component {
 
     render() {
         const { dataSource, fromFetch, loading } = this.state
-        return ( 
+        return (
             <UserDetailView
                 goForFetch={this.goForFetch}
                 dataSource={dataSource}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PostDetailView from '../views/PostDetailView';
+import UserDetail from './UserDetail';
 
 import {
     StyleSheet,
@@ -18,12 +19,12 @@ class PostDetail extends Component {
     }
     componentWillMount() {
         let _postid = this.state.postid;
-        if (this.props.route.params.postid !== 'undefined') {
+        if (typeof this.props.route !== 'undefined') {
             _postid = this.props.route.params.postid
-        } else if (this.props.postid !== 'undefined') {
+        } else if (typeof this.props.postid !== 'undefined') {
             _postid = this.props.postid
         } else {
-            _postid = 1
+            //_postid = 1
         }
         this.setState({
             postid: _postid,
@@ -43,21 +44,31 @@ class PostDetail extends Component {
                 console.log('getting data from api', responseJson)
                 this.setState({
                     loading: false,
-                    dataSource: responseJson
+                    dataSource: responseJson,
+                    creatorUserId: responseJson.userId
                 })
             })
             .catch(error => console.log(error))
     }
 
-    render() {
-        const { dataSource, fromFetch, loading } = this.state
+    renderUser = () => {
         return (
-            <PostDetailView
-                goForFetch={this.goForFetch}
-                dataSource={dataSource}
-                loading={loading}
-                fromFetch={fromFetch}
-            />
+            <UserDetail userid={this.state.creatorUserId} />
+        )
+    }
+
+    render() {
+        const { dataSource, fromFetch, loading, creatorUserId } = this.state
+        return (
+            <View>
+                <PostDetailView
+                    goForFetch={this.goForFetch}
+                    dataSource={dataSource}
+                    loading={loading}
+                    fromFetch={fromFetch}
+                />
+                <UserDetail userid={creatorUserId} />
+            </View>
         );
     }
 }
