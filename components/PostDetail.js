@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PostDetailView from '../views/PostDetailView';
 import UserDetail from './UserDetail';
+import CommentList from './CommentList';
 
 import {
     StyleSheet,
@@ -59,7 +60,7 @@ class PostDetail extends Component {
     }
 
     render() {
-        const { dataSource, fromFetch, loading, creatorUserId, displayExtra } = this.state
+        const { postid, dataSource, fromFetch, loading, creatorUserId, displayExtra } = this.state
         return (
             <View>
 
@@ -72,6 +73,8 @@ class PostDetail extends Component {
                     loading={loading}
                     fromFetch={fromFetch}
                 />
+
+                <CommentList postid={postid} title="Comments" displayExtra={false} />
 
                 {
                     displayExtra ?
