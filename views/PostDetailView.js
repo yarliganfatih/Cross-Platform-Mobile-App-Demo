@@ -20,7 +20,7 @@ const PostDetailView = (props) => {
     //let DataTable = Object.values(dataSource).slice(0,4) // [5] error
     return (
         <View>
-            <View style={{ margin: 18 }}>
+            <View style={{ margin: 18, display: 'none' }}>
                 <Button
                     title={'Get Post Detail'}
                     onPress={goForFetch}

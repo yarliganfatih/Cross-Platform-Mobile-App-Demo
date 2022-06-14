@@ -5,7 +5,7 @@ const PostListView = (props) => {
 
     return (
         <View>
-            <View style={{ margin: 18 }}>
+            <View style={{ margin: 18, display: 'none' }}>
                 <Button
                     title={'Get Post List'}
                     onPress={goForFetch}

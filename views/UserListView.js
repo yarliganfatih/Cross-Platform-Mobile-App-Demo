@@ -4,7 +4,7 @@ const UserListView = (props) => {
     const { goForFetch, fromFetch, renderItem, FlatListItemSeparator, dataSource, loading } = props
     return (
         <View>
-            <View style={{ margin: 18 }}>
+            <View style={{ margin: 18, display: 'none' }}>
                 <Button
                     title={'Get User List'}
                     onPress={goForFetch}
