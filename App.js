@@ -7,6 +7,7 @@ import UserList from './components/UserList';
 import UserDetail from './components/UserDetail';
 import PostList from './components/PostList';
 import PostDetail from './components/PostDetail';
+import PhotoList from './components/PhotoList';
 
 function GoToButton({ screenName }) {
   const navigation = useNavigation();
@@ -33,6 +34,7 @@ function App() {
         <Stack.Screen name="User Detail" component={UserDetail} />
         <Stack.Screen name="Post List" component={PostList} />
         <Stack.Screen name="Post Detail" component={PostDetail} />
+        <Stack.Screen name="Photo List" component={PhotoList} />
       </Stack.Navigator>
       <View style={styles.NavigateBtnContainer}>
         <GoToButton screenName="User List" />
