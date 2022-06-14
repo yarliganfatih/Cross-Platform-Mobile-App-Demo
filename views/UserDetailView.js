@@ -16,7 +16,7 @@ const UserDetailView = (props) => {
   const { goForFetch, fromFetch, dataSource, loading } = props
   let HeadTable = Object.keys(dataSource)
   let DataTable = ObjToArr(dataSource).map(a => [a])
-  let DataHeights = [28, 28, 28, 28, 56, 28, 28, 56] //can be rendered by data length
+  let DataHeights = [28,28,28,28,70,28,28,84] //can be rendered by data length
   //let DataTable = Object.values(dataSource).slice(0,4) // [5] error
   return (
     <View>

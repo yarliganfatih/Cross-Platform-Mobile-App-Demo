@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Button, FlatList, ActivityIndicator } from 'react-native';
-const UserListView = (props) => {
+const PostListView = (props) => {
     const { goForFetch, fromFetch, renderItem, FlatListItemSeparator, dataSource, loading } = props;
 
     return (
@@ -32,4 +32,4 @@ const UserListView = (props) => {
         </View>
     )
 }
-export default UserListView;
+export default PostListView;

@@ -12,7 +12,7 @@ function ObjToArr(Obj) {
         return Obj;
     }
 }
-const UserDetailView = (props) => {
+const PostDetailView = (props) => {
     const { goForFetch, fromFetch, dataSource, loading } = props
     let HeadTable = Object.keys(dataSource)
     let DataTable = ObjToArr(dataSource).map(a => [a])
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
     text: { textAlign: 'center' }
 });
 
-export default UserDetailView;
+export default PostDetailView;
