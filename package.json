@@ -20,16 +20,15 @@
     "react-router-native": "4.2.0",
     "react-native-screens": "~3.10.1",
     "@react-navigation/stack": "*",
+    "react-native-reanimated": "~2.3.1",
     "@react-navigation/native": "*",
+    "react-native-image-gallery": "2.1.0",
+    "react-native-flatlist-slider": "*",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-table-component": "*",
     "@react-navigation/native-stack": "*",
-    "react-native-safe-area-context": "3.3.2",
-    "react-native-image-zoom-viewer": "*",
     "@georstat/react-native-image-cache": "*",
-    "react-native-reanimated": "~2.3.1",
-    "react-native-image-gallery": "2.1.0",
-    "react-native-flatlist-slider": "*"
+    "react-native-safe-area-context": "3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

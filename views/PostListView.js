@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Button, FlatList, ActivityIndicator } from 'react-native';
 const PostListView = (props) => {
     const { goForFetch, fromFetch, renderItem, FlatListItemSeparator, dataSource, loading } = props;
-
+  
     return (
         <View>
             <View style={{ margin: 18, display: 'none' }}>
@@ -20,7 +20,7 @@ const PostListView = (props) => {
                         ItemSeparatorComponent={FlatListItemSeparator}
                         renderItem={item => renderItem(item)}
                         keyExtractor={item => item.id}
-                    /> : "no data yet"
+                    /> : <Text>no data yet</Text>
                 }
                 {loading &&
                     <View>

@@ -19,7 +19,7 @@ const UserListView = (props) => {
                         ItemSeparatorComponent={FlatListItemSeparator}
                         renderItem={item => renderItem(item)}
                         keyExtractor={item => item.id}
-                    /> : "no data yet"
+                    /> : <Text>no data yet</Text>
                 }
                 {loading &&
                     <View>

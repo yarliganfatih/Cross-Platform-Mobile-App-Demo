@@ -88,7 +88,7 @@ class CommentList extends Component {
                 }}
             >
                 <Text style={{ fontWeight: 'bold', textAlign: 'left' }}>{data.item.name}</Text>
-                {this.state.displayBody[data.item.id] ? <Text style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}>{data.item.body}</Text> : ''}
+                <Text style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}> {this.state.displayBody[data.item.id] ? data.item.body : ''} </Text>
                 <Text style={{ color: 'gray', fontStyle: 'italic', textAlign: 'right' }}>{data.item.email}</Text>
             </TouchableOpacity>
         )

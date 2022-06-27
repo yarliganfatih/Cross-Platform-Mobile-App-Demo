@@ -38,7 +38,7 @@ const UserDetailView = (props) => {
               </TableWrapper>
             </Table>
           </ScrollView> :
-          "no data yet"
+          <Text>no data yet</Text>
         }
         {loading &&
           <View>
