@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PostDetailView from '../views/PostDetailView';
-import UserDetail from './UserDetail';
+import UserCard from './UserCard';
 import CommentList from './CommentList';
 
 import {
@@ -53,12 +53,6 @@ class PostDetail extends Component {
             .catch(error => console.log(error))
     }
 
-    renderUser = () => {
-        return (
-            <UserDetail userid={this.state.creatorUserId} />
-        )
-    }
-
     render() {
         const { postid, dataSource, fromFetch, loading, creatorUserId, displayExtra } = this.state
         return (
@@ -74,13 +68,16 @@ class PostDetail extends Component {
                     fromFetch={fromFetch}
                 />
 
-                <CommentList postid={postid} title="Comments" displayExtra={false} />
-
                 {
                     displayExtra ?
-                        <UserDetail userid={creatorUserId} title="Creator User Details" displayExtra={false} />
+                        <View>
+                            <UserCard userid={creatorUserId} title="Creator User" displayExtra={false} navigation={this.props.navigation} />
+                            <CommentList postid={postid} title="Comments" displayExtra={false} />
+                        </View>
                         : ""
                 }
+
+
             </View>
         );
     }
