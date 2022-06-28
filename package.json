@@ -28,7 +28,8 @@
     "react-native-table-component": "*",
     "@react-navigation/native-stack": "*",
     "@georstat/react-native-image-cache": "*",
-    "react-native-safe-area-context": "3.3.2"
+    "react-native-safe-area-context": "3.3.2",
+    "axios": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

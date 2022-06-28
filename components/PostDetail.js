@@ -40,8 +40,14 @@ class PostDetail extends Component {
             fromFetch: true,
             loading: true,
         })
-        fetch("https://jsonplaceholder.typicode.com/posts/" + this.state.postid)
-            .then(response => response.json())
+        var axios = require('axios');
+        var config = {
+            method: 'get',
+            url: "https://jsonplaceholder.typicode.com/posts/" + this.state.postid,
+            headers: {}
+        }
+        axios(config)
+            .then(response => response.data)
             .then((responseJson) => {
                 console.log('getting data from api', responseJson)
                 this.setState({

@@ -55,9 +55,14 @@ class PhotoList extends Component {
             fetchUrl = "https://jsonplaceholder.typicode.com/albums/" + this.state.albumid + "/photos";
         }
         console.log(fetchUrl);
-
-        fetch(fetchUrl)
-            .then(response => response.json())
+        var axios = require('axios');
+        var config = {
+          method: 'get',
+          url: fetchUrl,
+          headers: { }
+        }
+        axios(config)
+            .then(response => response.data)
             .then((responseJson) => {
                 console.log('getting data from api', responseJson)
                 this.setState({

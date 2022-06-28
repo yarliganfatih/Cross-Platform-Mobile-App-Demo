@@ -50,8 +50,14 @@ class UserDetail extends Component {
       fromFetch: true,
       loading: true,
     })
-    fetch("https://jsonplaceholder.typicode.com/users/" + this.state.userid)
-      .then(response => response.json())
+    var axios = require('axios');
+    var config = {
+      method: 'get',
+      url: "https://jsonplaceholder.typicode.com/users/" + this.state.userid,
+      headers: {}
+    }
+    axios(config)
+      .then(response => response.data)
       .then((responseJson) => {
         console.log('getting data from api', responseJson)
         this.setState({

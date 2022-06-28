@@ -50,9 +50,14 @@ class ToDoList extends Component {
             fetchUrl = fetchUrl + "?userId=" + this.state.userid;
         }
         console.log(fetchUrl);
-
-        fetch(fetchUrl)
-            .then(response => response.json())
+        var axios = require('axios');
+        var config = {
+            method: 'get',
+            url: fetchUrl,
+            headers: {}
+        }
+        axios(config)
+            .then(response => response.data)
             .then((responseJson) => {
                 console.log('getting data from api', responseJson)
                 this.setState({
@@ -81,18 +86,18 @@ class ToDoList extends Component {
                     console.log('pressed id :', data.item.id);
                 }}
             >
-              <View style={{flex: 1, flexDirection: 'row', justifyContent: "start"}}>
-                <Text style={{fontSize: 20}}>
-                {
-                  data.item.completed ?
-                    '☑'
-                  :
-                    '☐'
-                    // '☒'
-                }
-                </Text>
-                <Text style={{margin:5, textAlign:"left"}}>{data.item.title}</Text>
-              </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: "start" }}>
+                    <Text style={{ fontSize: 20 }}>
+                        {
+                            data.item.completed ?
+                                '☑'
+                                :
+                                '☐'
+                            // '☒'
+                        }
+                    </Text>
+                    <Text style={{ margin: 5, textAlign: "left" }}>{data.item.title}</Text>
+                </View>
             </TouchableOpacity>
         )
 

@@ -26,8 +26,14 @@ class UserList extends Component {
             fromFetch: true,
             loading: true,
         })
-        fetch("https://jsonplaceholder.typicode.com/users")
-            .then(response => response.json())
+        var axios = require('axios');
+        var config = {
+            method: 'get',
+            url: "https://jsonplaceholder.typicode.com/users",
+            headers: {}
+        }
+        axios(config)
+            .then(response => response.data)
             .then((responseJson) => {
                 console.log('getting data from api', responseJson)
                 this.setState({
