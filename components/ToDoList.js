@@ -52,9 +52,9 @@ class ToDoList extends Component {
         console.log(fetchUrl);
         var axios = require('axios');
         var config = {
-            method: 'get',
-            url: fetchUrl,
-            headers: {}
+          method: 'get',
+          url: fetchUrl,
+          headers: { }
         }
         axios(config)
             .then(response => response.data)
@@ -67,41 +67,6 @@ class ToDoList extends Component {
             })
             .catch(error => console.log(error))
     }
-    FlatListSeparator = () => {
-        return (
-            <View style={{
-                height: .5,
-                width: "100%",
-                backgroundColor: "rgba(0,0,0,0.5)",
-            }}
-            />
-        );
-    }
-    renderItem = (data) => {
-        return (
-            <TouchableOpacity
-                style={[{ padding: 5 }, data.item.id % 2 && { backgroundColor: '#ffffff' }]}
-                onPress={() => {
-
-                    console.log('pressed id :', data.item.id);
-                }}
-            >
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: "start" }}>
-                    <Text style={{ fontSize: 20 }}>
-                        {
-                            data.item.completed ?
-                                '☑'
-                                :
-                                '☐'
-                            // '☒'
-                        }
-                    </Text>
-                    <Text style={{ margin: 5, textAlign: "left" }}>{data.item.title}</Text>
-                </View>
-            </TouchableOpacity>
-        )
-
-    }
     render() {
         const { dataSource, fromFetch, loading } = this.state
         return (
@@ -110,12 +75,9 @@ class ToDoList extends Component {
                     {this.props.title}
                 </Text>
                 <ToDoListView
-                    goForFetch={this.goForFetch}
                     dataSource={dataSource}
                     loading={loading}
                     fromFetch={fromFetch}
-                    FlatListSeparator={this.FlatListSeparator}
-                    renderItem={this.renderItem}
                 />
             </View>
         );
