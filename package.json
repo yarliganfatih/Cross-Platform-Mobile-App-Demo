@@ -14,6 +14,7 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-web": "0.17.1",
+    "axios": "*",
     "expo-constants": "~13.0.2",
     "@expo/vector-icons": "^12.0.0",
     "react-native-paper": "4.9.2",
@@ -22,14 +23,14 @@
     "@react-navigation/stack": "*",
     "react-native-reanimated": "~2.3.1",
     "@react-navigation/native": "*",
+    "react-native-vector-icons": "*",
     "react-native-image-gallery": "2.1.0",
     "react-native-flatlist-slider": "*",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-table-component": "*",
     "@react-navigation/native-stack": "*",
-    "@georstat/react-native-image-cache": "*",
     "react-native-safe-area-context": "3.3.2",
-    "axios": "*"
+    "@georstat/react-native-image-cache": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

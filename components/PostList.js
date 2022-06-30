@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PostListView from '../views/PostListView';
+import Icon from 'react-native-vector-icons/Feather';
 import {
     StyleSheet,
     View,
@@ -81,7 +82,7 @@ class PostList extends Component {
     renderItem = (data) => {
         return (
             <TouchableOpacity
-                style={[{ padding: 5 }, data.item.id % 2 && { backgroundColor: '#ffffff' }]}
+                style={[{ padding: 5 }, data.item.id % 2 ? { backgroundColor: '#ffffff' } : { backgroundColor: '#F2F2F2' }]}
                 onPress={() => {
 
                     console.log('pressed id :', data.item.id); //TODO Router PostDetail
@@ -90,7 +91,15 @@ class PostList extends Component {
                     });
                 }}
             >
-                <Text>{data.item.title}</Text>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: "start" }}>
+                    <Icon
+                        name="pen-tool"
+                        size={20}
+                        color="blue"
+                        style={{ margin: 5 }}
+                    />
+                    <Text style={{ margin: 5, textAlign: "left" }}>{data.item.title}</Text>
+                </View>
             </TouchableOpacity>
         )
 

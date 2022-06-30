@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import UserListView from '../views/UserListView';
+import UserCardView from '../views/UserCardView';
 import {
     StyleSheet,
     View,
     ActivityIndicator,
     FlatList,
     Text,
+    Image,
     TouchableOpacity
 } from "react-native";
 
@@ -55,8 +57,9 @@ class UserList extends Component {
     }
     renderItem = (data) => {
         return (
+            //UserCardView
             <TouchableOpacity
-                style={[{ padding: 10 }, data.item.id % 2 && { backgroundColor: '#ffffff' }]}
+                style={{ padding: 10, backgroundColor: '#ffffff', borderRadius: 15, marginBottom: 5 }}
                 onPress={() => {
 
                     console.log('pressed id :', data.item.id);
@@ -65,7 +68,13 @@ class UserList extends Component {
                     });
                 }}
             >
-                <Text>{data.item.name}</Text>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: "start" }}>
+                    <Image source={require('../assets/default_pp.png')} style={{ width: 40, height: 40, borderRadius: 20 }} />
+                    <View style={{ flexDirection: 'column', paddingLeft: 10, justifyContent: "start" }}>
+                        <Text style={{ fontWeight: 600 }}>{data.item.name}</Text>
+                        <Text style={{ textAlign: "left" }}>@{data.item.username}#{data.item.id}</Text>
+                    </View>
+                </View>
             </TouchableOpacity>
         )
 

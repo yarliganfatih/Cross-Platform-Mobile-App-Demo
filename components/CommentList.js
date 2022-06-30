@@ -82,7 +82,7 @@ class CommentList extends Component {
     renderItem = (data) => {
         return (
             <TouchableOpacity
-                style={[{ padding: 10 }, data.item.id % 2 && { backgroundColor: '#ffffff' }]}
+                style={[{ padding: 10 }, data.item.id % 2 ? { backgroundColor: '#ffffff' } : { backgroundColor: '#F2F2F2' }]}
                 onPress={() => {
                     // may be dropdown
                     let blankArr = []

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, ActivityIndicator, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import UserCardView from '../views/UserCardView'
 
 class UserCard extends Component {
   constructor(props) {
@@ -78,24 +79,11 @@ class UserCard extends Component {
 
           <View style={{ margin: 18, textAlign: 'center' }}>
             {fromFetch ?
-              <TouchableOpacity
-                style={{ padding: 10, backgroundColor: '#ffffff', borderRadius: 15 }}
-                onPress={() => {
-
-                  console.log('pressed id :', dataSource.id);
-                  this.props.navigation.navigate('User Detail', {
-                    userid: dataSource.id,
-                  });
-                }}
+              <UserCardView
+                dataSource={dataSource}
+                navigation={this.props.navigation}
               >
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: "start" }}>
-                  <Image source={require('../assets/default_pp.png')} style={{ width: 40, height: 40, borderRadius: 20 }} />
-                  <View style={{ flexDirection: 'column', paddingLeft: 10, justifyContent: "start" }}>
-                    <Text style={{ fontWeight: 600 }}>{dataSource.name}</Text>
-                    <Text style={{ textAlign: "left" }}>@{dataSource.username}#{dataSource.id}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity> :
+              </UserCardView> :
               <Text>no data yet</Text>
             }
             {loading &&

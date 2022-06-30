@@ -80,7 +80,7 @@ class AlbumList extends Component {
     renderItem = (data) => {
         return (
             <TouchableOpacity
-                style={[{ padding: 5 }, data.item.id % 2 && { backgroundColor: '#ffffff' }]}
+                style={[{ padding: 5 }, data.item.id % 2 ? { backgroundColor: '#ffffff' } : { backgroundColor: '#F2F2F2' }]}
                 onPress={() => {
 
                     console.log('pressed id :', data.item.id); //TODO Router PostDetail
